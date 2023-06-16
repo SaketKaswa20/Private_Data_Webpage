@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Protected Website</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+    body {
+      background-color: black;
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .binary-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+      z-index: -1;
+      background-image: url('https://i.gifer.com/1kc1.gif');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .neon-green {
+      color: #0ff;
+    }
+
+    .neon-green-border {
+      border-color: #0ff;
+    }
+
+    .neon-green-bg {
+      background-color: #0ff;
+    }
+
+    .neon-green-bg:hover {
+      background-color: #00cccc;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+  <div class="binary-animation"></div>
+  <div class="password-container bg-black bg-opacity-80 p-8 rounded-md text-center">
+    <h1 class="text-4xl neon-green">Confidential Database</h1>
+    <label for="password" class="block mt-4 neon-green">Enter Password:</label>
+    <input type="password" id="password" class="block w-full mt-2 p-2 neon-green neon-green-border bg-transparent rounded-md" />
+    <button onclick="checkPassword()" class="block w-full mt-4 py-2 neon-green-bg neon-green-bg:hover text-black font-bold rounded-md">Submit</button>
+    <p id="message" class="mt-4 neon-green"></p>
+     <div id="loading" class="hidden mt-4">
+      <div class="w-full h-2 bg-black neon-green-border">
+        <div id="loading-bar" class="h-2 bg-green-500" style="width: 0;"></div>
+      </div>
+      <p id="percentage" class="mt-2 neon-green"></p>
+    </div>
+   </div>
+
+  <script>
+    function checkPassword() {
+      const passwordInput = document.getElementById('password');
+      const message = document.getElementById('message');
+      const correctPassword = 'Mafia2003';
+
+      if (passwordInput.value === correctPassword) {
+        message.setAttribute('data-text', 'Access Granted');
+        message.textContent = 'Access Granted';
+        showLoadingAnimation();
+      } else {
+        message.setAttribute('data-text', 'Wrong password');
+        message.textContent = 'Wrong password';
+      }
+    }
+
+    function showLoadingAnimation() {
+      const loading = document.getElementById('loading');
+      const loadingBar = document.getElementById('loading-bar');
+      const percentage = document.getElementById('percentage');
+      loading.classList.remove('hidden');
+
+      let width = 0;
+      const interval = setInterval(() => {
+        if (width >= 100) {
+          clearInterval(interval);
+          const embedCode = '<iframe width="981" height="552" src="https://www.youtube.com/embed/xvFZjo5PgG0?autoplay=1" title="Rick Roll (Different link + no ads)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+          document.body.innerHTML = embedCode;
+        } else {
+          width += 1;
+          loadingBar.style.width = width + '%';
+          percentage.textContent = width + '%';
+        }
+      }, 50);
+    }
+  </script>
+</body>
+</html>
